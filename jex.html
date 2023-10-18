@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>2 HTML TOUR</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="x-ua-compatible" content="IE=edge" />
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            color: #FFFFFF;
+            background-color: #000000;
+            overflow: hidden;
+        }
+
+        #pano {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        #overlay-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 20%;
+            z-index: 1;
+        }
+
+        #overlay-content {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .navbar {
+            overflow: visible;
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        .navbar a {
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            padding: 15px 17px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #b9b2b2;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 2;
+        }
+
+        .dropdown {
+            position: relative;
+            left: 570px;
+            font-size: 16px;
+        }
+
+        .dropdown .dropbtn {
+            font-size: 16px;
+            border: none;
+            outline: none;
+            color: white;
+            padding: 14px 16px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+            text-decoration: none;
+            text-shadow: 2px 1px #b6b6b6;
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #cac9c9;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .sidebar {
+            width: 250px;
+            height: 100%;
+            position: fixed;
+            top: 300px;
+            left: -250px;
+            transition: left 0.2s;
+        }
+
+        .sidebar a {
+            padding: 10px;
+            text-decoration: none;
+            font-size: 16px;
+            color: white;
+            /* background-color: #000000; */
+            display: block;
+            text-shadow: 1px 0.8px #b6b6b6;
+        }
+        .sidebar a:hover {
+            text-decoration: none;
+            color: rgb(121, 118, 118);
+            /* background-color: #d3cccc; */
+        }
+
+        .closebtn{
+            background-color: #000000;
+        }
+        
+
+        .logo {
+            transform: scale(0.9);
+            padding: 5px;
+        }
+
+        .booknow {
+            position: relative;
+            left: 600px;
+            background-color: #000000;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .booknow a {
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="pano">
+        <script src="tour.js"></script>
+        <noscript>
+            <table style="width:100%;height:100%;">
+                <tr style="vertical-align:middle;">
+                    <td>
+                        <div style="text-align:center;">
+                            ERROR:<br /><br />Javascript not activated<br /><br />
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </noscript>
+        <script>
+          
+            embedpano({ xml: "tour.xml", target: "pano", passQueryParameters: "startscene,startlookat" });
+            
+            function krpano() {
+                return document.getElementById("krpanoSWFObject");
+
+                krpano.set("events.onloadcomplete","js(toggleSidebar(option))");
+                krpano.set("events.keep",true);
+            }
+            
+            // function loadscene(panoname) {
+            //     krpano().call("loadscene(" + panoname + ", null, MERGE, BLEND(1));");
+                
+            // }
+            function loadscene(panoname, sidebarId) {
+    var krpano = document.getElementById("krpanoSWFObject");
+    if (krpano) {
+        krpano.call("loadscene(" + panoname + ", null, MERGE, BLEND(1));");
+
+        // Show the specific sidebar associated with the scene if sidebarId is defined
+        if (sidebarId) {
+            toggleSidebar(sidebarId);
+        }
+    }
+    // krpano = document.getElementById("krpanoSWFObject");krpano.set("events.onloadcomplete","js(toggleSidebar(option))");krpano.set("events.keep",true);
+
+}
+
+        </script>
+    </div>
+
+    <div id="overlay-container">
+        <div id="overlay-content">
+            <div class="navbar">
+                <a href="https://www.avanihotels.com/en/fares-maldives" target="_blank">
+                    <img src="./Images/logo.png" alt="Logo" class="logo">
+                </a>
+            
+                <div class="dropdown">
+                    <button class="dropbtn">Resort</button>
+                    <div class="dropdown-content">
+                        <a href="#service1" id="item1" onClick="loadscene('scene_celebritiesgiftshop'); toggleSidebar('option1');">Service 1</a>
+                        <a href="#service2" id="item2" onclick="loadscene('scene_celebritiesgiftshop'); toggleSidebar('option2')">Service 2</a>
+                        <a href="#service3" id="item3" onclick="loadscene('scene_celebritiesgiftshop'); toggleSidebar('option3')">Service 3</a>
+                        <a href="#service4" id="item4" onClick="loadscene('scene_celebritiesgiftshop'); toggleSidebar('option1')">Service 4</a>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <button class="dropbtn">Living</button>
+                    <div class="dropdown-content">
+                        <a href="#service4" onClick="loadscene('scene_lobby'); toggleSidebar('option3')">Service 1</a>
+                        <a href="#service5" onClick="loadscene('scene_suitebathroom'); toggleSidebar('option1')">Service 2</a>
+                        <a href="#service6" onClick="loadscene('scene_dining_archivist_diningarea'); closeSidebar()">Service 3</a>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <button class="dropbtn">Dining</button>
+                    <div class="dropdown-content">
+                        <a href="#service7" onClick="loadscene('scene_dining_archivist_diningarea'); closeSidebar()">Service 1</a>
+                        <a href="#service8" onClick="loadscene('scene_suitebathroom'); closeSidebar()">Service 2</a>
+                        <a href="#service9" onClick="loadscene('scene_dining_archivist_diningarea'); closeSidebar()">Service 3</a>
+                    </div>
+                </div>
+
+                <button class="booknow"><a href="https://www.avanihotels.com/en/fares-maldives" target="_blank">Book now</a></button>
+            </div>
+
+            <div class="sidebar" id="sidebar-option1">
+                <a href="#" class="closebtn" onclick="toggle3()" >Close &#11167;</a>
+                <a href="#" class="opx" onClick="loadscene('scene_dining_inkandplate_entranceconnectingscene');">Option 1</a>
+                <a href="#" class="opx" onClick="loadscene('scene_dining_inkandplate_privatediningarea');">Option 2</a>
+                <a href="#" class="opx" onClick="loadscene('scene_suitebathroom');">Option 3</a>
+            </div>
+
+            <div class="sidebar" id="sidebar-option2">
+                <a href="#" class="closebtn" onclick="toggle3()" >Close &#11167;</a>
+                <a href="#" class="opx" onClick="loadscene('scene_deluxeroombathroom');" >Option 7</a>
+                <a href="#" class="opx" onClick="loadscene('scene_dining_inkandplate_privatediningarea');" >Option 8</a>
+                <a href="#" class="opx" onClick="loadscene('scene_suitebathroom');" >Option 9</a>
+            </div>
+
+            <div class="sidebar" id="sidebar-option3">
+                <a href="#" class="closebtn" id="anc" onclick="toggle3()" >Close &#11167;</a>
+                <a href="#" class="opx" onClick="loadscene('scene_dining_inkandplate_diningarea');" >Option 4</a>
+                <a href="#" class="opx" onClick="loadscene('scene_suitebathroom');" >Option 5</a>
+                <a href="#" class="opx" onClick="loadscene('scene_dining_archivist_entrance');" >Option 6</a>
+            </div>
+
+            <script>
+                var currentDropdown = null;
+                var currentSidebar = null;
+
+                console.log("Hello")
+          console.log(krpano);
+
+                // function showSidebarAndLoadScene(panoname) {
+                //     var sidebar = document.getElementById("sidebar");
+                //     var krpano = document.getElementById("krpanoSWFObject");
+                //     if (sidebar) {
+                //         sidebar.style.left = "0";
+                //     }
+                //     if (krpano) {
+                //         krpano.call("loadscene(" + panoname + ", null, MERGE, BLEND(1));");
+                //     }
+                // }
+
+
+
+                 function closeSidebar() {
+                    var sidebarElements = document.querySelectorAll('.sidebar');
+                    sidebarElements.forEach(function(sidebar) {
+                        sidebar.style.left = '-250px';
+                    });
+                }
+
+                function toggleSidebar(option) {
+                    if (currentSidebar) {
+                        currentSidebar.style.left = "-250px";
+                    }
+                    var sidebar = document.getElementById("sidebar-" + option);
+                    sidebar.style.left = "0px";
+                    currentSidebar = sidebar;
+                } 
+
+
+                function toggle3() {
+                    let button = document.querySelectorAll('.closebtn');
+                    let optionElements = document.querySelectorAll('.opx');
+
+                    for (let option of optionElements) {
+                            if (option.style.display !== 'none') {
+                            option.style.display = 'none';
+                            } 
+                            else {
+                            option.style.display = 'block';
+                            }
+                        }
+                }   
+
+//                 function toggleSidebar(sidebarId) {
+//     var sidebar = document.getElementById(sidebarId);
+//     sidebar.style.left = "0px";
+// }
+
+
+
+
+
+            </script>
+
+            
+        </div>
+    </div>
+</body>
+</html>

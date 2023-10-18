@@ -1,0 +1,287 @@
+﻿<krpano version="1.21" title="Virtual Tour">
+
+	<include url="skin/vtourskin.xml" />
+	<include url="blend.xml" />
+	
+	
+		<!-- Sample Blend Script use seconds if required blend(seconds),"blend(7)" -->
+<!-- <events name="blend" onloadcomplete="blendhotspot(pano_name);blend()"/>     -->
+<!-- <events name="blend_mul3" onloadcomplete="blendhotspot_mul3(pano_name1,pano_name2);blend_mul3());"/> -->
+<!-- <events name="blend_mul4" onloadcomplete="blendhotspot_mul4(pano_name1,pano_name2,pano_name3);blend_mul4());"/> -->
+
+	<!-- customize skin settings: maps, gyro, webvr, thumbnails, tooltips, layout, design, ... -->
+	<skin_settings maps="false"
+	               maps_type="google"
+	               maps_bing_api_key=""
+	               maps_google_api_key=""
+	               maps_zoombuttons="false"
+	               maps_loadonfirstuse="true"
+	               gyro="true"
+	               gyro_keeplookingdirection="false"
+	               webvr="true"
+	               webvr_keeplookingdirection="true"
+	               webvr_prev_next_hotspots="true"
+	               autotour="false"
+	               littleplanetintro="false"
+	               followmousecontrol="false"
+	               title="true"
+	               thumbs="true"
+	               thumbs_width="120" thumbs_height="80" thumbs_padding="10" thumbs_crop="0|40|240|160"
+	               thumbs_opened="false"
+	               thumbs_text="false"
+	               thumbs_dragging="true"
+	               thumbs_onhoverscrolling="false"
+	               thumbs_scrollbuttons="false"
+	               thumbs_scrollindicator="false"
+	               thumbs_loop="false"
+	               tooltips_buttons="false"
+	               tooltips_thumbs="false"
+	               tooltips_hotspots="false"
+	               tooltips_mapspots="false"
+	               deeplinking="false"
+	               loadscene_flags="MERGE"
+	               loadscene_blend="OPENBLEND(0.5, 0.0, 0.75, 0.05, linear)"
+	               loadscene_blend_prev="SLIDEBLEND(0.5, 180, 0.75, linear)"
+	               loadscene_blend_next="SLIDEBLEND(0.5,   0, 0.75, linear)"
+	               loadingtext=""
+	               layout_width="100%"
+	               layout_maxwidth="814"
+	               controlbar_width="-24"
+	               controlbar_height="40"
+	               controlbar_offset="20"
+	               controlbar_offset_closed="-40"
+	               controlbar_overlap.no-fractionalscaling="10"
+	               controlbar_overlap.fractionalscaling="0"
+	               design_skin_images="vtourskin.png"
+	               design_bgcolor="0x2D3E50"
+	               design_bgalpha="0.8"
+	               design_bgborder="0"
+	               design_bgroundedge="1"
+	               design_bgshadow="0 4 10 0x000000 0.3"
+	               design_thumbborder_bgborder="3 0xFFFFFF 1.0"
+	               design_thumbborder_padding="2"
+	               design_thumbborder_bgroundedge="0"
+	               design_text_css="color:#FFFFFF; font-family:Arial;"
+	               design_text_shadow="1"
+	               />
+
+	
+		<!-- startup action - load the first scene -->
+	<action name="startup" autorun="onstart">
+		default_actions();
+		global_actions();
+		if(startscene === null OR !scene[get(startscene)], copy(startscene,scene[0].name); );
+		loadscene(get(startscene), null, MERGE);
+		if(startactions !== null, startactions() );
+	</action>
+	
+	<action name="default_actions">
+		
+		
+	</action>
+
+	
+	
+	<events name="url_events" keep="true"	       
+	        onnewpano="deeplinking_update();"	        
+	        />	
+	
+	<action name="deeplinking_update" scope="local">
+		copy(adr, browser.location);
+		copy(si, scene[get(xml.scene)].index);
+		txtadd(adr, '?startscene=' , get(si) );
+		js(history.replaceState(null, document.title, get(adr)); );		
+	</action>
+	
+	
+
+	
+	<scene name="scene_celebritiesgiftshop" title="celebritiesgiftshop" onstart="default_actions();" thumburl="panos/celebritiesgiftshop.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="-48.384" vlookat="1.469" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/celebritiesgiftshop.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/celebritiesgiftshop.tiles/pano_%s.jpg" />
+		</image>
+
+		<events name="myevents" onloadcomplete="js(toggleSidebar('option1'))" keep="false" />
+
+	</scene>
+
+	<scene name="scene_deluxeroombathroom" title="deluxeroombathroom" onstart="default_actions();" thumburl="panos/deluxeroombathroom.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="-55.634" vlookat="10.441" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/deluxeroombathroom.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/deluxeroombathroom.tiles/pano_%s.jpg" />
+		</image>
+	<events name="myevents" onloadcomplete="js(toggleSidebar('option2'))" keep="false" />
+	</scene>
+
+	<scene name="scene_dining_archivist_diningarea" title="dining_archivist_diningarea" onstart="default_actions();" thumburl="panos/dining_archivist_diningarea.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/dining_archivist_diningarea.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/dining_archivist_diningarea.tiles/pano_%s.jpg" />
+		</image>
+
+		<events name="myevents" onloadcomplete="js(toggleSidebar('option3'))" keep="false" />
+
+	</scene>
+
+	<scene name="scene_dining_archivist_entrance" title="dining_archivist_entrance" onstart="default_actions();" thumburl="panos/dining_archivist_entrance.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="-83.356" vlookat="-2.867" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/dining_archivist_entrance.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/dining_archivist_entrance.tiles/pano_%s.jpg" />
+		</image>
+
+		<events name="myevents" onloadcomplete="js(closeSidebar())" keep="false" />
+
+	</scene>
+	
+	
+	
+
+	<scene name="scene_dining_inkandplate_buffettable1" title="dining_inkandplate_buffettable1" onstart="default_actions();" thumburl="panos/dining_inkandplate_buffettable1.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/dining_inkandplate_buffettable1.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/dining_inkandplate_buffettable1.tiles/pano_%s.jpg" />
+		</image>
+
+	</scene>
+
+	<scene name="scene_dining_inkandplate_buffettable2" title="dining_inkandplate_buffettable2" onstart="default_actions();" thumburl="panos/dining_inkandplate_buffettable2.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/dining_inkandplate_buffettable2.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/dining_inkandplate_buffettable2.tiles/pano_%s.jpg" />
+		</image>
+
+	</scene>
+
+	<scene name="scene_dining_inkandplate_diningarea" title="dining_inkandplate_diningarea" onstart="default_actions();" thumburl="panos/dining_inkandplate_diningarea.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="81.762" vlookat="1.853" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/dining_inkandplate_diningarea.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/dining_inkandplate_diningarea.tiles/pano_%s.jpg" />
+		</image>
+
+	</scene>
+
+	<scene name="scene_dining_inkandplate_entranceconnectingscene" title="dining_inkandplate_entranceconnectingscene" onstart="default_actions();" thumburl="panos/dining_inkandplate_entranceconnectingscene.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="107.591" vlookat="2.219" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/dining_inkandplate_entranceconnectingscene.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/dining_inkandplate_entranceconnectingscene.tiles/pano_%s.jpg" />
+		</image>
+
+	</scene>
+
+	<scene name="scene_dining_inkandplate_privatediningarea" title="dining_inkandplate_privatediningarea" onstart="default_actions();" thumburl="panos/dining_inkandplate_privatediningarea.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="114.811" vlookat="0.007" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/dining_inkandplate_privatediningarea.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/dining_inkandplate_privatediningarea.tiles/pano_%s.jpg" />
+		</image>
+
+	</scene>
+
+	<scene name="scene_dining_inkandplate_privatediningarea_02" title="dining_inkandplate_privatediningarea_02" onstart="default_actions();" thumburl="panos/dining_inkandplate_privatediningarea_02.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/dining_inkandplate_privatediningarea_02.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/dining_inkandplate_privatediningarea_02.tiles/pano_%s.jpg" />
+		</image>
+
+	</scene>
+
+	<scene name="scene_lobby" title="lobby" onstart="default_actions();" thumburl="panos/lobby.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="-114.566" vlookat="1.891" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/lobby.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/lobby.tiles/pano_%s.jpg" />
+		</image>
+
+	</scene>
+
+	<scene name="scene_suitebathroom" title="suitebathroom" onstart="default_actions();" thumburl="panos/suitebathroom.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="71.822" vlookat="0.929" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/suitebathroom.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/suitebathroom.tiles/pano_%s.jpg" />
+		</image>
+
+	</scene>
+
+
+	    <plugin name="serverinfo" url="../../../../serverinfo.png"  keep="true" X="0" Y="5" autoalpha="1"  align="center" zorder="11" handcursor="1" onclick="tween(plugin[serverinfo].alpha,0)"   /> 
+
+<!-- <plugin name="panomatics_base" url="skin/panomatics_base.png"  keep="true" X="5" Y="5"  align="bottomleft" zorder="11" handcursor="1"  onclick="openurl(http://www.panomatics.com/,_blank);" /> -->
+
+<contextmenu versioninfo="false">  
+<item name="fsc" caption="FULLSCREEN" />        
+<item caption="Panomatics.com"   onclick="openurl(http://www.panomatics.com/,_blank);"  />   
+</contextmenu>
+
+
+</krpano>
